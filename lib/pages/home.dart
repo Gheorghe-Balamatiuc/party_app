@@ -54,11 +54,34 @@ class MyHomePageState extends State<MyHomePage> {
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(50),
                         color: Theme.of(context).colorScheme.inversePrimary.withOpacity(0.5),
                       ),
                       padding: const EdgeInsets.all(8),
-                      child: Text(snapshot.data?[index].name ?? ""),
+                      child: Column(
+                        children: [
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              snapshot.data?[index].name ?? "",
+                              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Center(child: Text("Buget: ${snapshot.data?[index].budget.toString() ?? ""}")),
+                        ),
+                        Expanded(
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {}, 
+                              child: const Text("Press here!"),
+                            ),
+                          ),
+                        ),
+                      ],
+                      ),
                     );
                   },
                 );
@@ -70,6 +93,11 @@ class MyHomePageState extends State<MyHomePage> {
             }
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Add new party',
+        child: const Icon(Icons.add),
       ),
     );
   }
