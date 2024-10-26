@@ -16,4 +16,25 @@ class ApiService {
       throw Exception('Failed to load parties');
     }
   }
+
+  Future<Party> createParty(String name, String budget) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/api/Party'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'partyName': name,
+        'budget': budget,
+        'memberResponsibilities': [].toString(),
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      return Party.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    } else {
+      print(response.body);
+      throw Exception('Failed to create Party.');
+    }
+  }
 }
