@@ -35,4 +35,14 @@ class ApiService {
       throw Exception('Failed to create party');
     }
   }
+
+  Future<PartyWithMembers> fetchParty(int id) async {
+    final response = await http.get(Uri.parse("$baseUrl/Party/$id"));
+    
+    if (response.statusCode == 200) {
+      return PartyWithMembers.fromJson(json.decode(response.body) as Map<String, dynamic>);
+    } else {
+      throw Exception('Failed to load party');
+    }
+  }
 }
