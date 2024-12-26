@@ -101,7 +101,9 @@ class MyHomePageState extends State<MyHomePage> {
                             child: SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () {}, 
+                                onPressed: () {
+                                  AutoRouter.of(context).navigate(PartyRoute(partyId: snapshot.data?[index].id ?? 0));
+                                }, 
                                 child: const Text("Press here!"),
                               ),
                             ),
