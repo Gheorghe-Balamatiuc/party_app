@@ -53,4 +53,22 @@ class ApiService {
       throw Exception('Failed to delete party');
     }
   }
+
+  Future<void> modifyParty(int id, String title, double budget) async {
+    final response = await http.put(
+      Uri.parse("$baseUrl/Party/$id"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "partyId": id,
+        "partyName": title,
+        "budget": budget,
+      }),
+    );
+
+    if (response.statusCode != 204) {
+      throw Exception('Failed to modify party');
+    }
+  }
 }

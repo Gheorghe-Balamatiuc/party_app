@@ -14,6 +14,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(path: '', page: MyHomeRoute.page),
         AutoRoute(path: 'add', page: AddPartyRoute.page),
         AutoRoute(path: 'party/:id', page: PartyRoute.page),
+        AutoRoute(path: 'modify-party/:id', page: ModifyPartyRoute.page),
       ],
     ),
   ];

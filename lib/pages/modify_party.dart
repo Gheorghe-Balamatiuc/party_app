@@ -4,16 +4,25 @@ import 'package:party_app/api/api.dart';
 import 'package:party_app/router/router.gr.dart';
 
 @RoutePage()
-class AddPartyPage extends StatefulWidget {
-  const AddPartyPage({super.key});
+class ModifyPartyPage extends StatefulWidget {
+  const ModifyPartyPage({
+    super.key,
+    @PathParam('id') required this.partyId,
+    required this.partyName,
+    required this.partyBudget,
+  });
+
+  final int partyId;
+  final String partyName;
+  final double partyBudget;
 
   @override
-  State<AddPartyPage> createState() {
-    return _AddPartyPageState();
+  State<ModifyPartyPage> createState() {
+    return _ModifyPartyPageState();
   }
 }
 
-class _AddPartyPageState extends State<AddPartyPage> {
+class _ModifyPartyPageState extends State<ModifyPartyPage> {
   late ApiService apiService;
   late TextEditingController _partyNameController;
   late TextEditingController _partyBudgetController;
@@ -22,15 +31,15 @@ class _AddPartyPageState extends State<AddPartyPage> {
   void initState() {
     super.initState();
     apiService = ApiService();
-    _partyNameController = TextEditingController();
-    _partyBudgetController = TextEditingController();
+    _partyNameController = TextEditingController(text: widget.partyName);
+    _partyBudgetController = TextEditingController(text: widget.partyBudget.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Party'),
+        title: const Text('Modify Party'),
       ),
       body: Container(
         alignment: Alignment.center,
@@ -59,12 +68,12 @@ class _AddPartyPageState extends State<AddPartyPage> {
                       onPressed: () async {
                         final partyName = _partyNameController.text;
                         final partyBudget = double.parse(_partyBudgetController.text);
-                        await apiService.createParty(partyName, partyBudget);
+                        await apiService.modifyParty(widget.partyId, partyName, partyBudget);
                         if (context.mounted) {
                           AutoRouter.of(context).navigate(const MyHomeRoute());
                         }
                       },
-                      child: const Text('Create Party'),
+                      child: const Text('Modify Party'),
                     ),
                   ),
                 ],

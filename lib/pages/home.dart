@@ -106,6 +106,22 @@ class MyHomePageState extends State<MyHomePage> {
                                     },
                                   ),
                                 ),
+                                Positioned(
+                                  left: 10,
+                                  top: 10,
+                                  child: IconButton(
+                                    icon: const Icon(Icons.edit),
+                                    onPressed: () {
+                                      AutoRouter.of(context).navigate(
+                                        ModifyPartyRoute(
+                                          partyId: snapshot.data?[index].id ?? 0,
+                                          partyName: snapshot.data?[index].name ?? "",
+                                          partyBudget: snapshot.data?[index].budget ?? 0.0,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
                               ],
                             ),
                           ),
