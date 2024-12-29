@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:party_app/models/member.dart';
 import 'package:party_app/models/party.dart';
 import 'package:http/http.dart' as http;
 
@@ -69,6 +70,34 @@ class ApiService {
 
     if (response.statusCode != 204) {
       throw Exception('Failed to modify party');
+    }
+  }
+
+  Future<Member> addMember(String firstName, String lastName, int partyId) async {
+    final response = await http.post(
+      Uri.parse("$baseUrl/Member"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "firstName": firstName,
+        "lastName": lastName,
+        "partyId": partyId,
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      return Member.fromJson(json.decode(response.body) as Map<String, dynamic>);
+    } else {
+      throw Exception('Failed to add member');
+    }
+  }
+
+  Future<void> deleteMember(int id) async {
+    final response = await http.delete(Uri.parse("$baseUrl/Member/$id"));
+
+    if (response.statusCode != 204) {
+      throw Exception('Failed to delete member');
     }
   }
 }
