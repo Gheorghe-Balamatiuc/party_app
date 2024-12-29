@@ -87,11 +87,26 @@ class MyHomePageState extends State<MyHomePage> {
                       child: Column(
                         children: [
                           Expanded(
-                            child: Center(
-                              child: Text(
-                                snapshot.data?[index].name ?? "",
-                                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                              ),
+                            child: Stack(
+                              children: [
+                                Center(
+                                  child: Text(
+                                    snapshot.data?[index].name ?? "",
+                                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Positioned(
+                                  right: 10,
+                                  top: 10,
+                                  child: IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () async {
+                                      await apiService.deleteParty(snapshot.data?[index].id ?? 0);
+                                      _refreshParties();
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Expanded(

@@ -45,4 +45,12 @@ class ApiService {
       throw Exception('Failed to load party');
     }
   }
+
+  Future<void> deleteParty(int id) async {
+    final response = await http.delete(Uri.parse("$baseUrl/Party/$id"));
+
+    if (response.statusCode != 204) {
+      throw Exception('Failed to delete party');
+    }
+  }
 }
