@@ -5,7 +5,7 @@ import 'package:party_app/models/party.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  final String baseUrl = "http://localhost:5028";
+  final String baseUrl = "https://localhost:7149";
 
   Future<List<Party>> fetchParties() async {
     final response = await http.get(Uri.parse("$baseUrl/Party"));
