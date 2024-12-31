@@ -8,17 +8,18 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i5;
-import 'package:flutter/material.dart' as _i6;
+import 'package:auto_route/auto_route.dart' as _i6;
+import 'package:flutter/material.dart' as _i7;
 import 'package:party_app/pages/add_party.dart' as _i1;
 import 'package:party_app/pages/home.dart' as _i2;
-import 'package:party_app/pages/modify_party.dart' as _i3;
-import 'package:party_app/pages/party.dart' as _i4;
+import 'package:party_app/pages/login.dart' as _i3;
+import 'package:party_app/pages/modify_party.dart' as _i4;
+import 'package:party_app/pages/party.dart' as _i5;
 
 /// generated route for
 /// [_i1.AddPartyPage]
-class AddPartyRoute extends _i5.PageRouteInfo<void> {
-  const AddPartyRoute({List<_i5.PageRouteInfo>? children})
+class AddPartyRoute extends _i6.PageRouteInfo<void> {
+  const AddPartyRoute({List<_i6.PageRouteInfo>? children})
       : super(
           AddPartyRoute.name,
           initialChildren: children,
@@ -26,7 +27,7 @@ class AddPartyRoute extends _i5.PageRouteInfo<void> {
 
   static const String name = 'AddPartyRoute';
 
-  static _i5.PageInfo page = _i5.PageInfo(
+  static _i6.PageInfo page = _i6.PageInfo(
     name,
     builder: (data) {
       return const _i1.AddPartyPage();
@@ -36,8 +37,8 @@ class AddPartyRoute extends _i5.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.HomePage]
-class HomeRoute extends _i5.PageRouteInfo<void> {
-  const HomeRoute({List<_i5.PageRouteInfo>? children})
+class HomeRoute extends _i6.PageRouteInfo<void> {
+  const HomeRoute({List<_i6.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -45,7 +46,7 @@ class HomeRoute extends _i5.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static _i5.PageInfo page = _i5.PageInfo(
+  static _i6.PageInfo page = _i6.PageInfo(
     name,
     builder: (data) {
       return const _i2.HomePage();
@@ -54,14 +55,49 @@ class HomeRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.ModifyPartyPage]
-class ModifyPartyRoute extends _i5.PageRouteInfo<ModifyPartyRouteArgs> {
+/// [_i3.LoginPage]
+class LoginRoute extends _i6.PageRouteInfo<LoginRouteArgs> {
+  LoginRoute({
+    _i7.Key? key,
+    List<_i6.PageRouteInfo>? children,
+  }) : super(
+          LoginRoute.name,
+          args: LoginRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginRoute';
+
+  static _i6.PageInfo page = _i6.PageInfo(
+    name,
+    builder: (data) {
+      final args =
+          data.argsAs<LoginRouteArgs>(orElse: () => const LoginRouteArgs());
+      return _i3.LoginPage(key: args.key);
+    },
+  );
+}
+
+class LoginRouteArgs {
+  const LoginRouteArgs({this.key});
+
+  final _i7.Key? key;
+
+  @override
+  String toString() {
+    return 'LoginRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i4.ModifyPartyPage]
+class ModifyPartyRoute extends _i6.PageRouteInfo<ModifyPartyRouteArgs> {
   ModifyPartyRoute({
-    _i6.Key? key,
+    _i7.Key? key,
     required int partyId,
     required String partyName,
     required double partyBudget,
-    List<_i5.PageRouteInfo>? children,
+    List<_i6.PageRouteInfo>? children,
   }) : super(
           ModifyPartyRoute.name,
           args: ModifyPartyRouteArgs(
@@ -76,11 +112,11 @@ class ModifyPartyRoute extends _i5.PageRouteInfo<ModifyPartyRouteArgs> {
 
   static const String name = 'ModifyPartyRoute';
 
-  static _i5.PageInfo page = _i5.PageInfo(
+  static _i6.PageInfo page = _i6.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ModifyPartyRouteArgs>();
-      return _i3.ModifyPartyPage(
+      return _i4.ModifyPartyPage(
         key: args.key,
         partyId: args.partyId,
         partyName: args.partyName,
@@ -98,7 +134,7 @@ class ModifyPartyRouteArgs {
     required this.partyBudget,
   });
 
-  final _i6.Key? key;
+  final _i7.Key? key;
 
   final int partyId;
 
@@ -114,8 +150,8 @@ class ModifyPartyRouteArgs {
 
 /// generated route for
 /// [_i2.MyHomePage]
-class MyHomeRoute extends _i5.PageRouteInfo<void> {
-  const MyHomeRoute({List<_i5.PageRouteInfo>? children})
+class MyHomeRoute extends _i6.PageRouteInfo<void> {
+  const MyHomeRoute({List<_i6.PageRouteInfo>? children})
       : super(
           MyHomeRoute.name,
           initialChildren: children,
@@ -123,7 +159,7 @@ class MyHomeRoute extends _i5.PageRouteInfo<void> {
 
   static const String name = 'MyHomeRoute';
 
-  static _i5.PageInfo page = _i5.PageInfo(
+  static _i6.PageInfo page = _i6.PageInfo(
     name,
     builder: (data) {
       return const _i2.MyHomePage();
@@ -132,12 +168,12 @@ class MyHomeRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.PartyPage]
-class PartyRoute extends _i5.PageRouteInfo<PartyRouteArgs> {
+/// [_i5.PartyPage]
+class PartyRoute extends _i6.PageRouteInfo<PartyRouteArgs> {
   PartyRoute({
-    _i6.Key? key,
+    _i7.Key? key,
     required int partyId,
-    List<_i5.PageRouteInfo>? children,
+    List<_i6.PageRouteInfo>? children,
   }) : super(
           PartyRoute.name,
           args: PartyRouteArgs(
@@ -150,13 +186,13 @@ class PartyRoute extends _i5.PageRouteInfo<PartyRouteArgs> {
 
   static const String name = 'PartyRoute';
 
-  static _i5.PageInfo page = _i5.PageInfo(
+  static _i6.PageInfo page = _i6.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<PartyRouteArgs>(
           orElse: () => PartyRouteArgs(partyId: pathParams.getInt('id')));
-      return _i4.PartyPage(
+      return _i5.PartyPage(
         key: args.key,
         partyId: args.partyId,
       );
@@ -170,7 +206,7 @@ class PartyRouteArgs {
     required this.partyId,
   });
 
-  final _i6.Key? key;
+  final _i7.Key? key;
 
   final int partyId;
 
