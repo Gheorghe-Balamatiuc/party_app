@@ -31,9 +31,30 @@
 
   <title>party_app</title>
   <link rel="manifest" href="manifest.json">
+  <script>
+    {{flutter_js}}
+  </script>
+  <script>
+     {{flutter_build_config}}
+  </script>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.1/auth0-spa-js.production.js" defer></script>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
-  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js" defer></script>
+  <script>
+    const serviceWorkerVersion = '{{flutter_service_worker_version}}';
+    window.addEventListener('load', function (ev) {
+      // Download main.dart.js
+      _flutter.loader.load({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function (engineInitializer) {
+          engineInitializer.initializeEngine().then(function (appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
