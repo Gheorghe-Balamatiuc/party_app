@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:party_app/router/router.dart';
+import 'package:party_app/services/auth_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  AuthService.instance.initializeAuth0();
   runApp(MyApp());
 }
 

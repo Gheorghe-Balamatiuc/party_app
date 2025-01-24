@@ -1,27 +1,36 @@
-import 'package:auth0_flutter/auth0_flutter_web.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:party_app/services/auth_service.dart';
 
 @RoutePage()
 class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
-
-  final auth0Web = Auth0Web('dev-vzcitzqbovf1yw7t.eu.auth0.com', 'EPRxqUn5cQoPhasuhZLDVNqbKX3h9wsJ');
+  const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    auth0Web.onLoad();
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      title: const Text('Login'),
+    ),
+    body: Center(
+      child: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () async => AuthService.instance.login(),
+            child: const Text('Login'),
+          ),
+          ElevatedButton(
+            onPressed: () async => AuthService.instance.signup(),
+            child: const Text('Signup'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              final credentials = await AuthService.instance.auth0.credentials();
+              print(credentials);
+            },
+            child: const Text('Get'),
+          ),
+        ],
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => auth0Web.loginWithRedirect(redirectUrl: 'http://localhost:3000/#/home'),
-          child: const Text('Login'),
-        ),
-      ),
-    );
-  }
+    ),
+  );
 }

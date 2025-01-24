@@ -7,7 +7,9 @@
         {
             "args": [
                 "--web-port",
-                "3000"],
+                "3000",
+                "--dart-define-from-file=.env/development.json",
+            ],
             "name": "party_app",
             "request": "launch",
             "type": "dart"

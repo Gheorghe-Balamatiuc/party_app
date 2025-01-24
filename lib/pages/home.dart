@@ -1,10 +1,10 @@
-import 'package:auth0_flutter/auth0_flutter_web.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color/flutter_color.dart';
 import 'package:party_app/api/api.dart';
 import 'package:party_app/models/party.dart';
 import 'package:party_app/router/router.gr.dart';
+import 'package:party_app/services/auth_service.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -27,15 +27,12 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   late ApiService apiService;
   late Future<List<Party>> futureParties;
-  late Auth0Web auth0Web;
 
   @override
   void initState() {
     super.initState();
     apiService = ApiService();
     futureParties = apiService.fetchParties();
-    auth0Web = Auth0Web('dev-vzcitzqbovf1yw7t.eu.auth0.com', 'EPRxqUn5cQoPhasuhZLDVNqbKX3h9wsJ');
-    auth0Web.onLoad();
   }
 
   void _refreshParties() {
@@ -52,8 +49,16 @@ class MyHomePageState extends State<MyHomePage> {
         title: const Text('It\'s time to party!'),
         actions: [
           ElevatedButton(
-            onPressed: () => auth0Web.logout(returnToUrl: 'http://localhost:3000/#/login'),
+            onPressed: () async => AuthService.instance.logout(),
             child: const Text('Logout'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              final credentials = await AuthService.instance.auth0.credentials();
+              print(credentials.user.name);
+              print(credentials.user.nickname);
+            },
+            child: const Text('Get'),
           ),
           IconButton(
             icon: const Icon(Icons.refresh),
