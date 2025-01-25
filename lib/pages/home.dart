@@ -27,6 +27,7 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   late ApiService apiService;
   late Future<List<Party>> futureParties;
+  String name = "";
 
   @override
   void initState() {
@@ -43,10 +44,12 @@ class MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final title = (name.isEmpty) ? "It's time to party!" : "It's time to party, $name!";
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('It\'s time to party!'),
+        title: Text(title),
         actions: [
           ElevatedButton(
             onPressed: () async => AuthService.instance.logout(),
@@ -55,8 +58,9 @@ class MyHomePageState extends State<MyHomePage> {
           ElevatedButton(
             onPressed: () async {
               final credentials = await AuthService.instance.auth0.credentials();
-              print(credentials.user.name);
-              print(credentials.user.nickname);
+              setState(() {
+                name = credentials.user.name ?? "";
+              });
             },
             child: const Text('Get'),
           ),
@@ -94,7 +98,7 @@ class MyHomePageState extends State<MyHomePage> {
                     return Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        color: Theme.of(context).colorScheme.inversePrimary.withOpacity(0.5),
+                        color: Theme.of(context).colorScheme.inversePrimary.withValues(alpha: 0.5),
                       ),
                       padding: const EdgeInsets.all(8),
                       child: Column(

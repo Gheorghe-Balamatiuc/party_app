@@ -39,6 +39,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   http: ^1.2.2
   auth0_flutter: ^1.7.2
+  url_strategy: ^0.3.0
+  universal_html: ^2.2.4
 
 dev_dependencies:
   flutter_test:

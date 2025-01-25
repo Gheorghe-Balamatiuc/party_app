@@ -13,21 +13,16 @@ class LoginPage extends StatelessWidget {
     ),
     body: Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 5,
         children: [
           ElevatedButton(
-            onPressed: () async => AuthService.instance.login(),
+            onPressed: () async => await AuthService.instance.login(),
             child: const Text('Login'),
           ),
           ElevatedButton(
-            onPressed: () async => AuthService.instance.signup(),
+            onPressed: () async => await AuthService.instance.signup(),
             child: const Text('Signup'),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              final credentials = await AuthService.instance.auth0.credentials();
-              print(credentials);
-            },
-            child: const Text('Get'),
           ),
         ],
       ),

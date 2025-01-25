@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:party_app/router/router.dart';
 import 'package:party_app/services/auth_service.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() {
+  AppRouter appRouter = AppRouter();
+
   WidgetsFlutterBinding.ensureInitialized();
-  AuthService.instance.initializeAuth0();
-  runApp(MyApp());
+  AuthService.instance.initializeAuth0(appRouter);
+  setPathUrlStrategy();
+  
+  runApp(MyApp(appRouter: appRouter,));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({
+    super.key,
+    required AppRouter appRouter,
+  }) : _appRouter = appRouter;
 
-  final _appRouter = AppRouter();
+  final AppRouter _appRouter;
 
   @override
   Widget build(BuildContext context) {
