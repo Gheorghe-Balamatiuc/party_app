@@ -1,3 +1,4 @@
+import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:auth0_flutter/auth0_flutter_web.dart';
 import 'package:party_app/helpers/constants.dart';
 import 'package:party_app/router/router.dart';
@@ -13,10 +14,13 @@ class AuthService {
 
   AuthService._internal();
 
+  Credentials? credentials;
+
   Future initializeAuth0(AppRouter appRouter) async {
     await auth0.onLoad().then((credentials) {
       if (credentials != null) {
         html.window.history.replaceState(null, '', '/home');
+        this.credentials = credentials;
       }
     });
   }

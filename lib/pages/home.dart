@@ -27,7 +27,6 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   late ApiService apiService;
   late Future<List<Party>> futureParties;
-  String name = "";
 
   @override
   void initState() {
@@ -44,25 +43,41 @@ class MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final title = (name.isEmpty) ? "It's time to party!" : "It's time to party, $name!";
+    int milliseconds = 0;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
+        title: FutureBuilder<void>(
+          future: Future.doWhile(() async {
+            await Future.delayed(const Duration(milliseconds: 10));
+            milliseconds += 10;
+            if (milliseconds > 1000) {
+              throw Exception('Timeout');
+            }
+            return AuthService.instance.credentials == null;
+          }),
+          builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                  "Something wrong with message: ${snapshot.error.toString()}",
+                  style: const TextStyle(color: Colors.white),
+                ),
+              );
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              return Text('It\'s time to party, ${AuthService.instance.credentials?.user.name ?? ""}');
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }
+        ),
         actions: [
           ElevatedButton(
             onPressed: () async => AuthService.instance.logout(),
             child: const Text('Logout'),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              final credentials = await AuthService.instance.auth0.credentials();
-              setState(() {
-                name = credentials.user.name ?? "";
-              });
-            },
-            child: const Text('Get'),
           ),
           IconButton(
             icon: const Icon(Icons.refresh),
