@@ -19,6 +19,8 @@ class AuthService {
   Future initializeAuth0(StackRouter appRouter) async {
     await auth0.onLoad(
       cacheLocation: CacheLocation.localStorage,
+      audience: auth0Audience,
+      scopes: {'openid', 'profile', 'email', 'read:data', 'modify:data'},
     ).then((credentials) {
       if (credentials != null) {
         this.credentials = credentials;
