@@ -8,9 +8,13 @@ class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
     AutoRoute(
+      path: '/',
+      page: LoadingRoute.page,
+      initial: true,
+    ),
+    AutoRoute(
       path: '/login', 
       page: LoginRoute.page,
-      initial: true,
     ),
     AutoRoute(
       path: '/home',
@@ -26,10 +30,6 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       path: '/error',
       page: ErrorRoute.page,
-    ),
-    AutoRoute(
-      path: '/loading',
-      page: LoadingRoute.page,
     ),
   ];
 }
